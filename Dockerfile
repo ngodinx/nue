@@ -1,16 +1,19 @@
+# Gunakan Bun resmi
 FROM oven/bun:1.2
 
 WORKDIR /app
+
+# Salin semua file proyek
 COPY . .
 
-# Install Nuekit CLI
-RUN bun install --global nuekit || bunx nuekit@latest
-ENV PATH="/root/.bun/bin:/usr/local/bin:${PATH}"
+# Install Nuekit global
+RUN bun install --global nuekit
 
-# Build project (hasil static build)
-RUN bunx nue build
+# Build versi production (tanpa hot reload)
+RUN nue build
 
+# Expose port (default Nue preview di 4000)
 EXPOSE 4000
 
-# Jalankan hasil build tanpa HMR
-CMD ["bunx", "nue", "serve"]
+# Jalankan hasil build (no HMR, aman HTTPS)
+CMD ["nue", "preview", "--port", "4000"]
