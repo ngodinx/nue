@@ -8,4 +8,4 @@ WORKDIR /app
 COPY . .
 
 # Install Nuekit secara global
-RUN bun instal
+RUN bun install
