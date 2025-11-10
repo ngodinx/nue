@@ -8,13 +8,13 @@ WORKDIR /app
 COPY . .
 
 # Install Nuekit secara global
-RUN bun install --global nuekit
+RUN bun install --global nuekit@latest || bun x nuekit@latest
 
-# Pastikan command "nue" tersedia di PATH
-ENV PATH="/root/.bun/bin:${PATH}"
+# Pastikan path bun global bin dikenali
+ENV PATH="/root/.bun/bin:/usr/local/bin:${PATH}"
 
-# Expose port default Nue
+# Expose port default Nue.js
 EXPOSE 4000
 
 # Jalankan Nue dev server
-CMD ["/root/.bun/bin/nue", "dev", "--host", "0.0.0.0"]
+CMD ["bun", "x", "nue", "dev", "--host", "0.0.0.0"]
