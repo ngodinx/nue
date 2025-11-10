@@ -1,21 +1,11 @@
-# Gunakan image Node.js yang ringan
-FROM node:18-alpine
+# Gunakan Bun resmi dari oven-sh
+FROM oven/bun:1.2
 
-# Set direktori kerja di dalam container
+# Set direktori kerja
 WORKDIR /app
 
-# Copy file package.json dan package-lock.json jika ada
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy semua file project
+# Copy semua file proyek
 COPY . .
 
-# Build project Nue.js
-RUN npm run build
-
-# Jalankan server untuk serve hasil build
-EXPOSE 3000
-CMD ["npm", "start"]
+# Install Nuekit secara global
+RUN bun instal
